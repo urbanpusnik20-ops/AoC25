@@ -1,38 +1,14 @@
+
 ## Part 1
+Vhodni podatki predstavljajo matematične naloge, zapisane v obliki stolpcev. Najprej preberem vse vrstice iz datoteke in jih shranim v seznam nizov. Ker vrstice niso nujno enako dolge, jih v kodi razširim z znaki presledkov, da imajo vse enako širino.
 
-Števila so zapisana "klasično", v vrsticah:
+Nato poiščem posamezne naloge tako, da pregledujem stolpce. Polna kolona presledkov pomeni ločnico med nalogami, zato iz zaporednih ne-praznih stolpcev sestavim posamezne bloke, kjer vsak blok predstavlja eno matematično nalogo.
 
-- za vsak blok vzamemo stolpce bloka,
-- v vsaki vrstici razen zadnje izrežemo substring bloka in ga obrežemo (trim),
-- ne-prazen substring je eno število,
-- spodnja vrstica v bloku vsebuje operator (`+` ali `*`),
-- z izbranimi števili izračunamo rezultat problema,
-- vse rezultate seštejemo.
-
----
+Za vsak blok najprej poiščem operacijo, ki je zapisana v spodnji vrstici bloka (znak `+` ali `*`). Nato grem po vrsticah od zgoraj navzdol in iz vsake vrstice izluščim število, ki pripada temu bloku. Števila sproti seštevam ali množim glede na operacijo in dobljeni rezultat prištejem k skupnemu rezultatu za Part 1.
 
 ## Part 2
+V drugem delu se spremeni način branja števil. Namesto branja po vrsticah zdaj berem po stolpcih, saj so števke zapisane navpično od zgoraj navzdol.
 
-Cephalopod zapis: števila so **po stolpcih**:
+Za vsak stolpec znotraj bloka zberem vse števke, ki niso presledki, in iz njih sestavim število. Nato ta števila ponovno seštevam ali množim glede na operacijo, enako kot v Part 1. Dobljeni rezultat prištejem k skupnemu rezultatu za Part 2.
 
-- še vedno veljajo isti bloki in isti operator na dnu bloka,
-- zdaj v vsakem stolpcu bloka preberemo znake od vrha do vrstice tik nad operatorjem,
-- izberemo samo števke (`0-9`) in jih zložimo skupaj v niz,
-- ne-prazen niz predstavlja eno število v tem stolpcu,
-- operator na dnu bloka (`+` ali `*`) velja za vsa stolpčna števila v bloku.
-
-Za vsak blok:
-
-- iz stolpcev zgradimo vsa števila po cephalopod pravilu,
-- uporabimo isti operator kot prej,
-- dobimo rezultat za ta problem,
-- vse rezultate seštejemo v skupni cephalopod "grand total".
-
----
-
-## Izhod
-
-Program izpiše dve števili:
-
-1. Prva vrstica: grand total za Part 1 (števila po vrsticah).
-2. Druga vrstica: grand total za Part 2 (števila po stolpcih).
+Na koncu program izpiše oba rezultata.

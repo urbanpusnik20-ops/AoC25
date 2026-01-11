@@ -1,36 +1,13 @@
-Part 1
+# Day 9 – Movie Theater
 
-Vsi rdeči kvadrati so podani s koordinatami.
-Za vsak par rdečih kvadratov izračunam pravokotnik, ki ga določata kot nasprotna kota:
+## Part 1
+Vhodni podatki so koordinate rdečih ploščic v ravnini. Vsaki dve rdeči ploščici lahko vzamem kot nasprotna vogala pravokotnika, ki je poravnan z osmi.
 
-area = (|x1 – x2| + 1) * (|y1 – y2| + 1)
+V prvem delu me zanima samo največja možna površina takega pravokotnika. Zato preberem vse točke v seznam in nato preverim vse možne pare točk. Za vsak par izračunam širino in višino pravokotnika kot absolutno razliko koordinat, povečano za ena, in iz tega dobim površino. Sproti si zapomnim največjo vrednost, ki jo na koncu izpišem kot rezultat za Part 1.
 
+## Part 2
+V drugem delu pravokotnik ne sme segati izven območja, ki ga tvorijo rdeče in zelene ploščice. Zelene ploščice skupaj z rdečimi tvorijo zaprt obroč in zapolnijo tudi notranjost.
 
-Skozi vse pare poiščem največjo površino.
+Najprej poenostavim koordinatni sistem tako, da vse različne X in Y koordinate preslikam v zaporedne indekse. Na tako zmanjšani mreži narišem rob območja med zaporednimi rdečimi ploščicami. Nato z iskanjem po širini označim vso zunanjost območja. Vse celice, ki niso zunaj, skupaj z robom, štejem kot dovoljene.
 
-Part 2
-
-Rdeči kvadrati tvorijo zaprto ortogonalno zanko, vmesni kvadrati med njimi pa so zeleni (tudi notranjost zanke je zelena).
-Pravokotnik je veljaven, če:
-
-ima rdeča kota,
-
-so vsi kvadrati v pravokotniku rdeči ali zeleni.
-
-Ker so koordinate zelo velike, uporabim koordinatno kompresijo, da zmanjšam grid na približno n × n.
-Na kompresiranem gridu:
-
-narišem rob poligona (rdeči kvadrati),
-
-z BFS označim zunanjost,
-
-vse kar ni zunaj je dovoljeno (rdeče + zeleno),
-
-naredim 2D prefix sum za hitre O(1) preverbe pravokotnikov,
-
-preverim vse pare rdečih kvadratov in vzamem največjo dovoljeno površino.
-
-Program izpiše:
-
-največja površina (part 1)
-največja površina (part 2)
+Da lahko hitro preverim, ali je celoten pravokotnik znotraj dovoljenega območja, si nad to mrežo izračunam tabelo delnih vsot. Nato ponovno pregledam vse pare rdečih ploščic. Če je pravokotnik med njima v celoti sestavljen samo iz dovoljenih celic, izračunam njegovo pravo površino v originalnih koordinatah in posodobim maksimum. Ta vrednost je rezultat za Part 2.

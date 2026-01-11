@@ -63,7 +63,7 @@ int main() {
     }
 
     // -----------------------------
-    // PART 2 – kvantni manifold, DP od spodaj navzgor
+    // PART 2 – kvantni manifold, DP od spodaj navzgor (chat much help)
     // -----------------------------
 
     // dp[r][c] = št. timeline-ov, če vstopimo v celico (r,c) od zgoraj

@@ -1,25 +1,15 @@
+ChatGPT uporabljen z alepši izpis
+
 ## Part 1
+Na začetku je številčnica nastavljena na 50. Iz vhodne datoteke po vrsticah berem rotacije v levo (L) in desno (R) skupaj z razdaljo. Vsako vrstico razbijem na smer vrtenja in število korakov.
 
-Številčnica ima vrednosti od 0 do 99, začnemo na položaju 50. Vhod (`input.txt`) vsebuje vrstice oblike `L68`, `R48`, kjer `L` pomeni vrtenje levo (proti manjšim številom), `R` pa desno (proti večjim številom). Število za črko je razdalja v klikih.
+Po vsaki rotaciji izračunam novo pozicijo na krožni številčnici z vrednostmi od 0 do 99. V kodi to naredim tako, da razdaljo najprej zmanjšam z ostankom pri deljenju z 100, nato pa trenutno pozicijo glede na smer vrtenja povečam ali zmanjšam. Na ta način poskrbim, da se pozicija vedno pravilno zavije okoli kroga.
 
-Za vsak ukaz:
-
-1. Preberemo smer (`L` ali `R`) in razdaljo.
-2. Novo pozicijo izračunamo z aritmetiko modulo 100.
-3. Če se rotacija konča na 0, povečamo števec za Part 1.
-
-Rezultat Part 1 je število rotacij, ki se končajo na 0.
+Ko je nova pozicija izračunana, preverim, ali je enaka 0. Če je, povečam števec za Part 1. Tako sproti sledim trenutni poziciji in številu zadetkov ničle.
 
 ## Part 2
+V drugem delu ni več dovolj, da preverjam samo končno pozicijo, ampak moram šteti vsak prehod čez 0, tudi če se ta zgodi med samo rotacijo. Ker so razdalje lahko zelo velike, v kodi ne simuliram vsakega posameznega klika.
 
-Za drugi del moramo šteti **vsak klik**, ki pripelje kazalec na 0, ne samo končne položaje rotacij.
+Namesto tega glede na trenutno pozicijo in smer vrtenja izračunam, koliko korakov je potrebnih do prvega prehoda čez 0. Če je razdalja dovolj velika, lahko nato izračunam še dodatna prehajanja, ki se ponovijo vsakih 100 korakov. Število teh prehodov sproti prištevam k rezultatu za Part 2.
 
-Namesto da bi simulirali vsak klik posebej, za posamezno rotacijo izračunamo:
-
-- pri desni rotaciji `R` je prvi klik na 0 pri koraku `s0 = (100 - position) mod 100`, pri levi `L` pa pri `s0 = position` (ali 100, če smo na 0),
-- če je razdalja `dist` vsaj `s0`, potem je število zadetkov 0 v tej rotaciji  
-  `1 + (dist - s0) / 100`.
-
-To število prištejemo v skupni `part2`. S tem dobimo skupno število vseh klikov, pri katerih je kazalec na 0.
-
-Časovna zahtevnost ostane linearna v številu rotacij (`O(n)`), ker na vsaki vrstici naredimo konstantno količino računanja.
+Na koncu vsake rotacije ponovno izračunam končno pozicijo na krožni številčnici na enak način kot v Part 1, da lahko pravilno nadaljujem z naslednjo rotacijo. Program na koncu izpiše rezultat za oba dela.

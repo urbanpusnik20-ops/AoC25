@@ -1,36 +1,12 @@
+
 ## Part 1
+Vhodni podatki predstavljajo mrežo znakov, kjer znak `@` pomeni zvitek papirja, pika `.` pa prazno polje. Najprej preberem celotno mrežo v vektor nizov, da lahko do posameznih polj dostopam z indeksi vrstic in stolpcev.
 
-Roll (`@`) je dostopen z viličarjem, če ima v **8 sosednih poljih** (tudi diagonale) **manj kot 4** sosednje rolle (`@`).
-
-Postopek:
-
-1. Za vsak `@` na mreži preštejemo število sosednjih `@` v 8 smereh.
-2. Če je to število `< 4`, ga štejemo kot dostopen.
-3. Rezultat Part 1 je število dostopnih rollov v začetnem stanju.
-
----
+Za vsak zvitek papirja preverim njegovih osem sosednjih polj (levo, desno, gor, dol in diagonale). V kodi imam pripravljena dva seznama premikov, s katerima enostavno preverjam vseh osem smeri. Preštejem, koliko sosednjih polj vsebuje znak `@`. Če ima zvitek manj kot štiri sosede, ga štejem kot dostopnega in ga prištejem k rezultatu za Part 1.
 
 ## Part 2
+V drugem delu se zvitki papirja lahko postopoma odstranjujejo. Najprej naredim kopijo začetne mreže, saj Part 2 ne sme vplivati na rezultat Part 1. Nato postopek ponavljam v zanki.
 
-Zdaj se rolli, ki so dostopni, lahko **odstranijo**. Ko jih odstranimo, se lahko zaradi spremenjene okolice dostopni rolli spremenijo, zato postopek ponavljamo:
+V vsaki iteraciji ponovno pregledam celotno mrežo in poiščem vse zvitke, ki imajo manj kot štiri sosede. Te zvitke si najprej shranim v seznam, da jih ne odstranjujem sproti med pregledovanjem. Ko je pregled končan, vse najdene zvitke odstranim iz mreže in njihovo število prištejem k rezultatu za Part 2.
 
-1. Najdemo vse rolle, ki so trenutno dostopni (isti pogoj kot v Part 1: manj kot 4 sosednji `@`).
-2. Vse te rolle odstranimo **hkrati** (spremenimo jih v `.`).
-3. Število odstranjenih rollov prištejemo v skupni števec.
-4. Ponavljamo, dokler v neki iteraciji ne najdemo nobenega več dostopnega rolla.
-
-Rezultat Part 2 je skupno število odstranjenih rollov.
-
----
-
-## Implementacija
-
-Program:
-
-- najprej izračuna Part 1 na originalni mreži,
-- nato naredi kopijo mreže in v zanki:
-  - poišče vse trenutne dostopne rolle (pogoj < 4 sosednjih `@`),
-  - jih odstrani in prišteje njihov count v skupno vsoto,
-  - ustavi se, ko v iteraciji ni nobenega rolla za odstraniti.
-
-Časovna zahtevnost je `O(k * h * w)`, kjer je `k` število iteracij. Za tipične Advent of Code velikosti je to brez problema.
+Postopek ponavljam, dokler v eni iteraciji ne najdem več nobenega zvitka, ki bi ga bilo možno odstraniti. Na koncu izpišem rezultat za oba dela.

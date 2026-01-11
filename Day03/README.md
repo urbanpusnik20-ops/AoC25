@@ -1,27 +1,12 @@
+
 ## Part 1
+Vsaka vrstica vhodne datoteke predstavlja eno banko baterij, kjer so števke zapisane zaporedno. Iz vsake banke moram izbrati točno dve bateriji, pri čemer vrstnega reda ne smem spreminjati, cilj pa je dobiti čim večje dvomestno število.
 
-V vsakem banku moramo izbrati **točno dve bateriji** (dve poziciji v nizu, v pravilnem vrstnem redu). Jolt je dvomestno število, sestavljeno iz izbranih dveh števk. Cilj je dobiti največje možno dvomestno število za vsako vrstico. Skupni rezultat je vsota teh največjih dvomestnih števil.
+V kodi vsako vrstico obravnavam kot niz znakov. Če je števk manj ali enako kot jih potrebujem, enostavno vzamem vse. Sicer pa števke izbiram postopoma. Najprej poiščem največjo možno prvo števko tako, da pregledujem le tisti del niza, iz katerega je še možno sestaviti celotno število. Ko izberem prvo števko, postopek ponovim za naslednjo, vedno začenjam iskanje za izbrano pozicijo.
 
-Za Part 1 program za vsak niz uporabi funkcijo `bestKDigits(line, 2)`.
+Iz izbranih števk sestavim število in ga prištejem k skupnemu rezultatu za Part 1.
 
 ## Part 2
+V drugem delu je postopek zelo podoben, le da moram iz vsake vrstice izbrati dvanajst števk namesto dveh. Logika izbire ostane enaka kot v Part 1, le število potrebnih števk je večje.
 
-Zdaj moramo v vsakem banku izbrati **točno 12 baterij**. Nastalo število je 12-mestno (števke v istem vrstnem redu kot v vhodu). Cilj je dobiti največje možno 12-mestno število za vsako vrstico in nato vse sešteti.
-
-Za vsak niz:
-
-1. Želimo izbrati podzaporedje dolžine `k` (za Part 2 je `k = 12`), tako da je nastalo število največje.
-2. Gremo po pozicijah od 1 do `k` in vsakič:
-   - v preostalem delu niza poiščemo največjo možno števko,
-   - pazimo, da za preostale pozicije ostane dovolj znakov,
-   - izbrano števko dodamo v rezultat, indeks pa premaknemo naprej.
-
-To je klasičen greedy za "največje leksikografsko podzaporedje" fiksne dolžine.
-
-Program:
-
-- za vsako vrstico izračuna `bestKDigits(line, 2)` in `bestKDigits(line, 12)`,
-- rezultate sešteje v `totalPart1` in `totalPart2`,
-- izpiše obe vsoti v dveh vrsticah (najprej Part 1, nato Part 2).
-
-Časovna zahtevnost je `O(n * k)` na vrstico, kjer je `k` majhen (2 ali 12), zato je efektivno linearna v dolžini vrstice.
+V kodi za oba dela uporabim isto funkcijo, ki kot parameter dobi število števk, ki jih mora izbrati. Tako se algoritem za izbiro največjega možnega števila ponovno uporabi brez dodatnega zapletanja. Rezultate za Part 1 in Part 2 sproti seštevam in ju na koncu izpišem.
